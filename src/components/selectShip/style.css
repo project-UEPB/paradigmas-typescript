@@ -1,0 +1,100 @@
+.container-options {
+  background-color: #fff;
+  height: 80px;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.img-select {
+  height: 30px;
+}
+
+.image-container {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.container-img {
+  padding: 5px;
+  display: flex;
+  margin: 0 10px;
+  flex-direction: column;
+  align-items: flex-end;
+  cursor: pointer;
+}
+
+.container-img:hover {
+  outline: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.selected-ship {
+  outline: 4px solid #ccc;
+  margin: 0 10px;
+  border-radius: 5px;
+}
+
+.image-container > div {
+  background-color: #ccc;
+  color: #000;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+
+.orientacao {
+  display: flex;
+  margin-left: 10px;
+  flex-direction: column;
+}
+
+.orientacao > button {
+  padding: 5px 10px;
+  border: 2px solid #CCC;
+  background-color: #fff;
+  font-weight: bold;
+  margin: 2px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.orientacao > button:hover {
+  background-color: #CCC;
+}
+
+.orientacao > .btn-orientacao-ativo {
+  background-color: #CCC;
+}
+
+.super-tiro > .btn-orientacao-ativo {
+  background-color: #CCC;
+}
+
+.super-tiro > .btn-block {
+  background-color: #CCC;
+  cursor: not-allowed;
+}
+
+.super-tiro > button {
+  padding: 5px 10px;
+  border: 2px solid #CCC;
+  background-color: #fff;
+  font-weight: bold;
+  margin: 2px;
+  height: 65px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.super-tiro > button:hover {
+  background-color: #CCC;
+}

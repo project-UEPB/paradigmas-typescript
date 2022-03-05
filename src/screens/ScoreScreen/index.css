@@ -1,0 +1,73 @@
+.container-jogo-score {
+  height: 100vh;
+  background: radial-gradient(
+    54.35% 106.19% at 50.71% 50.98%,
+    #009ff9 0%,
+    rgba(0, 163, 255, 0.26) 100%
+  );
+  padding-top: 100px;
+}
+
+.title-score {
+  font-size: 45px;
+  font-weight: 700;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  color: black;
+}
+
+.content-score {
+  border: 3px solid #ffff;
+  width: 700px;
+  height: 500px;
+  margin: 0 auto;
+  text-align: center;
+  background: white;
+  border-radius: 10px;
+}
+
+h1 {
+  text-align: center;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+table {
+  border-collapse: collapse;
+  margin: auto;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: center;
+  width: 120px;
+}
+
+th {
+  font-weight: bold;
+}
+
+tr:hover:nth-child(1n + 2) {
+  background-color: #009ff9;
+  color: #fff;
+}
+
+.container-jogo-score > button {
+  background: none;
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  font-size: 3rem;
+  border: none;
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+}
+
+.container-jogo-score > button:hover {
+  color: rgba(0, 0, 0, 0.6);
+}
