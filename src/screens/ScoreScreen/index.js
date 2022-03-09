@@ -16,7 +16,6 @@ const ScoreScreen = () => {
         await api
         .get("/score/read")
         .then((response) => {
-            console.log(response.data);
             setScores(response.data)
         })
         .catch((err) => {

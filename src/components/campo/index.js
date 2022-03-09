@@ -31,6 +31,9 @@ export const Campo = ({
   superTiro,
   onChangeSuperTiro,
   onChangeWin = () => {},
+  changehandlerRestartStates = () => {},
+  changeRestart = () => {},
+  restart,
   win,
 }) => {
   const handlerInitialCelulas = () => {
@@ -59,6 +62,16 @@ export const Campo = ({
   const [selectedCels, setSelectedCels] = useState([]);
   const [winner, setWinner] = useState(false);
 
+  useEffect(() => {
+    if (restart) {
+      setCelulas(handlerInitialCelulas());
+      setSelectedCels([]);
+      setWinner(false);
+      changehandlerRestartStates();
+      changeRestart(false);
+    }
+  }, [restart, handlerInitialCelulas]);
+
   const handlerUpdateCelulas = (x, y, objUpdate) => {
     const copy = [...celulas];
     copy[y][x] = objUpdate;
@@ -76,21 +89,20 @@ export const Campo = ({
   useEffect(() => {
     if (statusGame.inicio) {
       if (isWin() && !winner) {
-        if (playerGaming === 'IAzinha') {
+        if (player !== 'IAzinha') {
+          onChangeWin({ ...win, IAzinha: true });
+          changePoints({
+            ...points,
+            IAzinha: points.IAzinha + 10000,
+          });
+        }
+        if (player !== 'player') {
           onChangeWin({ ...win, player: true });
-
           changePoints({
             ...points,
             player: {
               ...points.player, points: points.player.points + 10000,
             },
-          });
-        }
-        if (playerGaming === 'player') {
-          onChangeWin({ ...win, IAzinha: true });
-          changePoints({
-            ...points,
-            IAzinha: points.IAzinha + 10000,
           });
         }
         setWinner(true);

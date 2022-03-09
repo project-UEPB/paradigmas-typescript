@@ -1,12 +1,13 @@
-const isEqual = (array, element) => array.find((item) => item.x === element.x
-&& item.y === element.y);
+import { PositionOpenedsFull } from '../dtos/positionOpenedsDTO';
 
-export const IAzona = (shipsAll, campConfig) => {
-  const positionsOpeneds = [];
+const isEqual = (array: Array<any>, element: any) => array.find((item: any) => item.x === element.x && item.y === element.y);
+
+export const IAzona = (shipsAll: any, campConfig: any) => {
+  const positionsOpeneds: PositionOpenedsFull[] = [];
   const nextPostions = [];
 
-  shipsAll.map((line) => {
-    line.map((object) => {
+  shipsAll.map((line: any) => {
+    line.map((object: any) => {
       if (object.open) {
         // console.log(object);
         positionsOpeneds.push({

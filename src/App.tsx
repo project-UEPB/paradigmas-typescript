@@ -3,8 +3,8 @@
 
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import HomeScreen from './screens/HomeScreen/index.js';
-import ScoreScreen from './screens/ScoreScreen/index.js';
+import HomeScreen from './screens/HomeScreen/index';
+import ScoreScreen from './screens/ScoreScreen/index';
 import { ContainerBatalha } from  './components/containerBatalha';
 import UserContext from './UserContext';
 
@@ -21,7 +21,7 @@ export const App = () => {
       <UserContext.Provider value={[info, setInfo]} >
         <Router>
           <Routes>
-            <Route exact element={<HomeScreen/>} path="/" />
+            <Route element={<HomeScreen/>} path="/" />
             <Route element={<ContainerBatalha />} path="/game" />
             <Route element={<ScoreScreen/>} path="/score" />
           </Routes>

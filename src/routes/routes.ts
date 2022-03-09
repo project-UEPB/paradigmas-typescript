@@ -1,6 +1,6 @@
 /* eslint-disable */
-import HomeScreen from "../screens/HomeScreen.js";
-import ScoreScreen from "../screens/ScoreScreen.js";
+import HomeScreen from "../screens/HomeScreen";
+import ScoreScreen from "../screens/ScoreScreen";
 import { ContainerBatalha } from  '../components/containerBatalha'
 
 const routes = [

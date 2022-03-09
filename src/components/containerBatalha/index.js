@@ -90,8 +90,25 @@ export const ContainerBatalha = () => {
   const [playerGaming, setPlayerGaming] = useState('player');
   const [superTiro, setSuperTiro] = useState(initialSuperTiro);
   const [win, setWin] = useState(initialSuperTiro);
+  const [restart, setRestart] = useState(false);
   const [context, setContext] = useContext(UserContext);
   const navigate = useNavigate();
+
+  const handlerRestart = () => {
+    setRestart(true);
+  };
+
+  const handlerRestartStates = () => {
+    if (restart) {
+      setStatusGame(initialStatusGame);
+      setPoints(initialPoints);
+      setShips(initialShips);
+      setOrientacao('h');
+      setPlayerGaming('player');
+      setSuperTiro(initialSuperTiro);
+      setWin(initialSuperTiro);
+    }
+  };
 
   const handlerGoToHome = () => {
     navigate('/', { replace: true });
@@ -129,8 +146,8 @@ export const ContainerBatalha = () => {
 
   const handlerConfig = () => {
     if (!statusGame.config) {
-      setShips(initialShips);
       setStatusGame({ ...initialStatusGame, config: true });
+      setShips(initialShips);
     }
   };
 
@@ -161,11 +178,11 @@ export const ContainerBatalha = () => {
   };
 
   useEffect(() => {
-    if (win.player) {
+    if (win.player && !win.IAzinha) {
       postWin();
       alert(`Parabéns, ${context.name} você venceu!!!`);
     }
-    if (win.IAzinha) {
+    if (win.IAzinha && !win.player) {
       alert('Que pena a IAzinha venceu!!!');
     }
   }, [win]);
@@ -193,6 +210,9 @@ export const ContainerBatalha = () => {
               orientacao={orientacao}
               setSelectedShip={setShips}
               onChangeWin={setWin}
+              restart={restart}
+              changehandlerRestartStates={handlerRestartStates}
+              changeRestart={setRestart}
               win={win}
               statusGame={statusGame}
               campoConfig={{ x: context.campSize, y: context.campSize }}
@@ -215,6 +235,9 @@ export const ContainerBatalha = () => {
               player="IAzinha"
               superTiro={superTiro}
               onChangeSuperTiro={setSuperTiro}
+              restart={restart}
+              changehandlerRestartStates={handlerRestartStates}
+              changeRestart={setRestart}
               win={win}
               onChangeWin={setWin}
             />
@@ -241,7 +264,7 @@ export const ContainerBatalha = () => {
           <Botao
             text="Reiniciar"
             onClick={() => {
-              // location.reload();
+              handlerRestart();
             }}
           />
           <Botao
