@@ -23,6 +23,7 @@ const initialPoints = {
   },
   IAzinha: 0,
 };
+
 export const initialShips = [
   {
     kind: 'submarino',
@@ -73,8 +74,8 @@ const initialSuperTiro = {
   IAzinha: false,
 };
 
-const findBy = (kind, arr) => arr.filter((el) => el.kind === kind)[0];
-const removeOne = (kind, arr) => {
+const findBy = (kind: any, arr: Array<any>) => arr.filter((el: any) => el.kind === kind)[0];
+const removeOne = (kind: any, arr: any) => {
   const aux = [];
   for (const el of arr) {
     if (el.kind !== kind) aux.push({ ...el, selected: false });
@@ -114,7 +115,7 @@ export const ContainerBatalha = () => {
     navigate('/', { replace: true });
   };
 
-  const handlerSelectedShip = (shipKey) => {
+  const handlerSelectedShip = (shipKey: any) => {
     if (statusGame.config) {
       const qtdShip = findBy(shipKey, ships).qtd;
 
@@ -185,7 +186,7 @@ export const ContainerBatalha = () => {
     if (win.IAzinha && !win.player) {
       alert('Que pena a IAzinha venceu!!!');
     }
-  }, [win]);
+  }, [win, context.name]);
 
   return (
     <div className="container-jogo">

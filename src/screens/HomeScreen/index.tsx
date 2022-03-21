@@ -21,7 +21,7 @@ const HomeScreen = () => {
     navigate("/score", { replace: true });
   }
 
-  const handleShowDevTeam = () => {
+  const handleShowDevTeam = (): any => {
     setShowModal(true);
   }
 

@@ -7,20 +7,25 @@ import { useNavigate } from 'react-router-dom';
 
 import './index.css';
 
+
+
 const ScoreScreen = () => {
       
-    const [scores, setScores] = useState();
+    const [scores, setScores] = useState() as any;
     const navigate = useNavigate();
 
-    useEffect(async () => {
-        await api
-        .get("/score/read")
-        .then((response) => {
-            setScores(response.data)
-        })
-        .catch((err) => {
-            console.error("ops! ocorreu um erro" + err);
-        });
+    useEffect(() => {
+        const getData = async () => {
+            await api
+            .get("/score/read")
+            .then((response) => {
+                setScores(response.data)
+            })
+            .catch((err) => {
+                console.error("ops! ocorreu um erro" + err);
+            });
+        }
+        getData();
     }, []);
 
     const handlerGoToHome = () => {
@@ -47,7 +52,7 @@ const ScoreScreen = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {scores ? scores.map((row, index) => ( index < 5 ?
+                {scores ? scores.map((row: any, index: any) => ( index < 5 ?
                     (<tr key={row.id}>
                     <td>{row.name}</td>
                     <td>{row.score}</td>

@@ -1,10 +1,22 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState, useLayoutEffect } from 'react';
+import React, { useState } from 'react';
 import { Botao } from '../Botao';
 
 import './style.css';
 
-const findBy = (kind, arr) => arr.filter((el) => el.kind === kind)[0];
+const findBy = (kind: any, arr: any) => arr.filter((el: any) => el.kind === kind)[0];
+
+type TypeProps = {
+    initialShips: any,
+    onChangeShip: any,
+    onChangeSelectedShip: any,
+    orientacao: any,
+    onChangeOrientacao: any,
+    statusGame: any,
+    superTiro: any,
+    onChangeSuperTiro: any,
+    playerGaming: any,
+}
 
 export const SelectShip = ({
   initialShips,
@@ -16,13 +28,13 @@ export const SelectShip = ({
   superTiro,
   onChangeSuperTiro,
   playerGaming,
-}) => {
-  const [selectedShip, setSelectedShip] = useState('');
-  const [reload, setReload] = useState(false);
+}: TypeProps) => {
+  // const [selectedShip, setSelectedShip] = useState('');
+  // const [reload, setReload] = useState(false);
   const [superTiroPlayer, setSuperTiroPlayer] = useState(false);
-  const [ships, setShips] = useState([]);
+  // const [ships, setShips] = useState([]);
 
-  const handlerDecrementShip = (shipKey) => {
+  const handlerDecrementShip = (shipKey: any) => {
     onChangeSelectedShip(shipKey);
   };
 

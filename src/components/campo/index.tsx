@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { Celula } from '../celula';
 import {
@@ -7,15 +8,47 @@ import { IAzona } from '../../utils/iazinha';
 
 import './style.css';
 
-const getShipSelected = (arr) => arr.filter((o) => o.selected)[0];
-const removeOne = (kind, arr) => arr.filter((o) => o.kind !== kind);
-const XRigthSideIsValid = (size, arr, x) => {
+const getShipSelected = (arr: Array<any>) => arr.filter((o) => o.selected)[0];
+const removeOne = (kind: string, arr: Array<any>) => arr.filter((o) => o.kind !== kind);
+const XRigthSideIsValid = (size: number, arr: Array<any>, x: number) => {
   for (let i = x; i < x + size; i++) {
     if (arr[i].ship.hasShip) return false;
   }
 
   return true;
 };
+
+type TypePlayer = {
+  name: string;
+  points: number;
+}
+
+type TypePoints = {
+  player: TypePlayer;
+  IAzinha: number;
+};
+
+type Props = {
+  points: TypePoints;
+  changePoints: (a: TypePoints) => any;
+  player?: string;
+  seletedShip?: any;
+  statusGame?: any;
+  orientacao?: any;
+  setSelectedShip?: any;
+  campoConfig?: any;
+  playerGaming?: any;
+  setPlayerGaming?: any;
+  superTiro?: any;
+  onChangeSuperTiro?: any;
+  onChangeWin: (a: any) => any;
+  changehandlerRestartStates: () => any;
+  changeRestart: (a: boolean) => any;
+  restart: any;
+  win: any;
+}
+
+
 
 export const Campo = ({
   points,
@@ -35,7 +68,7 @@ export const Campo = ({
   changeRestart = () => {},
   restart,
   win,
-}) => {
+}: Props): any => {
   const handlerInitialCelulas = () => {
     const initialCelulas = new Array(campoConfig.x).fill(null).map(
       (_, i) => new Array(campoConfig.y).fill(null)
@@ -59,7 +92,7 @@ export const Campo = ({
   };
 
   const [celulas, setCelulas] = useState(handlerInitialCelulas());
-  const [selectedCels, setSelectedCels] = useState([]);
+  const [selectedCels, setSelectedCels] = useState([]) as any;
   const [winner, setWinner] = useState(false);
 
   useEffect(() => {
@@ -70,9 +103,9 @@ export const Campo = ({
       changehandlerRestartStates();
       changeRestart(false);
     }
-  }, [restart, handlerInitialCelulas]);
+  }, [restart, handlerInitialCelulas, changeRestart, changehandlerRestartStates]);
 
-  const handlerUpdateCelulas = (x, y, objUpdate) => {
+  const handlerUpdateCelulas = (x: any, y: any, objUpdate: any) => {
     const copy = [...celulas];
     copy[y][x] = objUpdate;
     setCelulas(copy);
@@ -80,7 +113,7 @@ export const Campo = ({
 
   const isWin = () => {
     let qtdWin = (4 * 2) + (3 * 3) + (2 * 4) + 5;
-    celulas.map((line) => line.map((cel) => {
+    celulas.forEach((line) => line.forEach((cel) => {
       if (cel.open && cel.ship.hasShip) qtdWin--;
     }));
     return qtdWin === 0;
@@ -94,7 +127,7 @@ export const Campo = ({
           changePoints({
             ...points,
             IAzinha: points.IAzinha + 10000,
-          });
+          } as any);
         }
         if (player !== 'player') {
           onChangeWin({ ...win, player: true });
@@ -103,14 +136,14 @@ export const Campo = ({
             player: {
               ...points.player, points: points.player.points + 10000,
             },
-          });
+          } as any);
         }
         setWinner(true);
       }
     }
   }, [celulas]);
 
-  const handlerConfigCels = (x, y) => {
+  const handlerConfigCels = (x: any, y: any) => {
     if (statusGame.config && getShipSelected(seletedShip)) {
       if (orientacao === 'h') {
         if (getShipSelected(seletedShip).qtd - 1 < 0) return;
@@ -205,9 +238,14 @@ export const Campo = ({
     setCelulas(copy);
   };
 
-  const handlerSelectedCels = (x, y) => {
-    const copy = [...selectedCels];
-    copy.push({ x, y });
+  const handlerSelectedCels = (x: any, y: any) => {
+    const copy = [...selectedCels] as any;
+    type TypeCoords = {
+      x: any;
+      y: any;
+    }
+    const coord: TypeCoords = { x, y };
+    copy.push(coord);
     setSelectedCels(copy);
     handlerUpdateCelulas(
       x,
@@ -267,7 +305,7 @@ export const Campo = ({
     }
   };
 
-  const delay = (n) => {
+  const delay = (n: any) => {
     return new Promise(((resolve) => {
       setTimeout(resolve, n * 1000);
     }));
@@ -289,7 +327,7 @@ export const Campo = ({
 
   useEffect(() => {
     if (player === 'IAzinha' && selectedCels.length === 3) {
-      let auxPoints = { ...points };
+      let auxPoints = { ...points } as any;
       for (let i = 0; i < selectedCels.length; i++) {
         handlerUpdateCelulas(
           selectedCels[i].x,
@@ -334,7 +372,7 @@ export const Campo = ({
     }
   }, [selectedCels]);
 
-  const handlerGame = (x, y) => {
+  const handlerGame = (x: any, y: any) => {
     if (statusGame.config) handlerConfigCels(x, y);
 
     if (statusGame.inicio) {
@@ -405,7 +443,7 @@ export const Campo = ({
 
         onChangeSuperTiro({ ...superTiro, [playerGaming]: null });
 
-        let auxPoints = { ...points };
+        let auxPoints = { ...points } as any;
         for (let i = 0; i < selected.length; i++) {
           handlerUpdateCelulas(
             selected[i].x,
@@ -467,7 +505,7 @@ export const Campo = ({
         });
 
         if (player === 'player' && celsSelected.length === 3) {
-          let auxPoints = { ...points };
+          let auxPoints = { ...points } as any;
           for (let i = 0; i < celsSelected.length; i++) {
             await delay(1);
 
@@ -510,18 +548,20 @@ export const Campo = ({
 
     fnAux();
   }, [playerGaming]);
-
+  
   return (
     <div className={campoConfig.x === 16 ? 'campo campo-16x16' : 'campo campo-12x12'}>
-      {celulas.map((line, y) => line.map((configCel, x) => (
-        <Celula
-          statusGame={statusGame}
-          key={(x ** 2) + y}
-          configCel={configCel}
-          xy={{ x, y }}
-          onOpen={() => handlerGame(x, y)}
-        />
-      )))}
+      {celulas.map((line, y) => line.map((configCel, x) => {
+        return (
+          <Celula
+            statusGame={statusGame}
+            key={(x ** 2) + y}
+            configCel={configCel}
+            xy={{ x, y }}
+            onOpen={() => handlerGame(x, y)}
+          /> 
+        )
+      }))}
     </div>
   );
 };

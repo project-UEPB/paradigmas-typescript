@@ -5,9 +5,18 @@ import React from 'react';
 
 import './style.css';
 
+type TypeProps = {
+  configCel: any;
+  onOpen: any;
+  // changePoints: any;
+  // open: any;
+  statusGame: any;
+  xy: any
+}
+
 export const Celula = ({
-  configCel, onOpen, changePoints, open, statusGame, xy,
-}) => {
+  configCel, onOpen, statusGame, xy
+}: TypeProps) => {
   const handlerOnClick = () => {
     onOpen();
   };
@@ -22,7 +31,7 @@ export const Celula = ({
         alt=""
       />
       )}
-      {(!configCel.ship.size > 0 && !statusGame.config) && (
+      {(!(configCel.ship.size > 0) && !statusGame.config) && (
         <img
           className="bomba"
           src="/assets/img/bomba.svg"
